@@ -1,0 +1,74 @@
+{% extends 'skillswap/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="jumbotron text-center bg-primary text-white rounded">
+        <h1 class="display-4">Swap Skills. Build Community.</h1>
+        <p class="lead">Find tutoring, tech help, creative services, and more.</p>
+    </div>
+    {% if user.is_authenticated %}
+    <form method="get" class="row g-2 my-4">
+        <div class="col-md-6">
+            <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search by title...">
+        </div>
+        <div class="col-md-4">
+            <select name="category" class="form-select">
+                <option value="">All categories</option>
+                {% for value, label in category_choices %}
+                    <option value="{{ value }}" {% if selected_category == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+    <div class="row">
+        {% for skill in skills %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ skill.title }}</h5>
+                    <p class="card-text text-muted mb-2 small">Offered by: <strong>{{ skill.owner.first_name }} {{ skill.owner.last_name }}</strong></p>
+                    <span class="badge bg-info text-dark">{{ skill.get_category_display }}</span>
+                    <p class="card-text mt-2">{{ skill.description }}</p>
+                    {% if not skill.is_free %}
+                        <span class="badge bg-dark mb-2">${{ skill.price }}</span>
+                    {% else %}
+                        <span class="badge bg-success mb-2">Free</span>
+                    {% endif %}
+                    <div class="mt-2">
+                        <span class="text-warning">★</span>
+                        <span class="text-muted">
+                            {% if skill.avg_rating > 0 %}
+                                {{ skill.avg_rating|floatformat:1 }} ({{ skill.reviews.count }} review{{ skill.reviews.count|pluralize }})
+                            {% else %}
+                                No rating yet
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'skillswap:skill_detail' skill.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                No skills found yet.
+                {% if user.is_staff %}
+                    <div class="small mt-2">Tip: seed demo data with <code>python manage.py seed</code>.</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center my-5">
+        <h3 class="mb-4">Please log in or register to start swapping skills!</h3>
+        <a href="{% url 'skillswap:login' %}" class="btn btn-primary btn-lg mx-2">Login</a>
+        <a href="{% url 'skillswap:register' %}" class="btn btn-outline-primary btn-lg mx-2">Register</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Resume • AI Portfolio{% endblock %}
+
+{% block content %}
+  {% static 'resume/resume.pdf' as resume_url %}
+
+  <section class="page-hero mb-4">
+    <h1 class="page-title">Resume</h1>
+    <div class="page-title-underline" aria-hidden="true"></div>
+    <p class="page-subtitle mt-3">Download the PDF or preview it below.</p>
+
+    {% if resume_enabled %}
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <a class="btn btn-primary" href="{{ resume_url }}" target="_blank" rel="noreferrer">Download Resume (PDF)</a>
+      </div>
+    {% endif %}
+  </section>
+
+  {% if resume_enabled %}
+    <div class="card case-card">
+      <div class="card-body p-0">
+        <iframe
+          title="Resume PDF"
+          src="{{ resume_url }}"
+          class="w-100"
+          style="min-height: 75vh; border: 0;">
+        </iframe>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-warning">
+      Resume PDF not found yet.
+    </div>
+  {% endif %}
+{% endblock %}

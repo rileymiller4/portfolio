@@ -1,0 +1,122 @@
+[
+  {
+    "model": "projects.project",
+    "pk": 1,
+    "fields": {
+      "title": "Chatbot Project",
+      "slug": "chatbot-project",
+      "one_sentence_summary": "Built a conversational assistant to answer user questions and route requests efficiently.",
+      "business_problem": "Users needed fast, consistent answers without waiting for a human response; the goal was to reduce response time and improve user experience.",
+      "tools_used": "Python\nLLM API (add provider)\nPrompt design\nEvaluation & testing",
+      "key_features": "Intent routing\nConversation memory\nSafety / fallback responses\nLogging for iteration",
+      "role_contribution": "Designed the prompts, implemented the conversation flow, and validated outputs against representative user questions.",
+      "biggest_challenge": "Getting consistent answers across edge cases and preventing hallucinations while keeping responses helpful.",
+      "what_i_learned": "How to iterate on prompts with clear success metrics, and how to design guardrails for real users.",
+      "image": "",
+      "github_url": "",
+      "demo_url": "",
+      "created_at": "2026-04-28T00:00:00Z",
+      "updated_at": "2026-04-28T00:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 2,
+    "fields": {
+      "title": "n8n Agent Workflow Project",
+      "slug": "n8n-agent-workflow-project",
+      "one_sentence_summary": "Automated a multi-step agent workflow to connect tools and reduce repetitive manual work.",
+      "business_problem": "Teams lose time to repetitive tasks; automation reduces errors and frees time for higher-value work.",
+      "tools_used": "n8n\nAPIs / webhooks\nJSON\nLLM (optional)",
+      "key_features": "Trigger-based flows\nTool integrations\nRetries and error handling\nNotifications",
+      "role_contribution": "Designed and built the workflow, connected the integrations, and tested reliability with failure scenarios.",
+      "biggest_challenge": "Designing robust error handling and making the workflow debuggable when external APIs fail.",
+      "what_i_learned": "How to structure automation like software: observability, retries, and clear input/output contracts.",
+      "image": "",
+      "github_url": "",
+      "demo_url": "",
+      "created_at": "2026-04-28T00:00:00Z",
+      "updated_at": "2026-04-28T00:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 3,
+    "fields": {
+      "title": "LangChain Agent Project",
+      "slug": "langchain-agent-project",
+      "one_sentence_summary": "Created an agent that selects tools to complete tasks and returns structured, actionable results.",
+      "business_problem": "Users needed a system that can combine reasoning with tools (search, retrieval, calculations) instead of a single-shot response.",
+      "tools_used": "Python\nLangChain\nVector store (optional)\nLLM API\n\nHandyManProject requirements (highlights)\nlangchain==1.2.11\nlanggraph==1.1.0\nlangchain-google-genai==4.2.1\ngoogle-api-python-client==2.192.0\ngoogle-auth==2.49.0\ngoogle-auth-oauthlib==1.3.0\ngoogle-genai==1.66.0\ngoogle-generativeai==0.8.6\nhttpx==0.28.1\naiohttp==3.13.3\npydantic==2.12.5\npython-dotenv==1.2.2\nSQLAlchemy==2.0.48\n\n(HandyManProject has 88 pinned packages total in requirements.txt)",
+      "key_features": "Tool calling\nRAG / retrieval\nStructured outputs\nEvaluation prompts",
+      "role_contribution": "Implemented agent/tool interfaces, tuned prompts, and validated tool selection behavior.",
+      "biggest_challenge": "Making tool selection predictable and avoiding looping behavior.",
+      "what_i_learned": "How to constrain agents with clear tool descriptions, stopping conditions, and structured outputs.",
+      "image": "",
+      "github_url": "",
+      "demo_url": "",
+      "created_at": "2026-04-28T00:00:00Z",
+      "updated_at": "2026-04-28T00:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 4,
+    "fields": {
+      "title": "Google AI Studio Media Project",
+      "slug": "google-ai-studio-media-project",
+      "one_sentence_summary": "Recreated a Jurassic Park-style scene with a twist using a multimodal image-to-video workflow.",
+      "business_problem": "Video is one of the fastest ways to communicate an idea, but creating a short cinematic scene usually requires time, equipment, and editing skills. This project explores how multimodal AI tools can speed up prototyping for storytelling, marketing concepts, and demo content while keeping results coherent.",
+      "tools_used": "Google AI Studio (video generation tools)\nGemini / LLM prompting (scene + shot descriptions)\nImage generator (Nano Banana or equivalent) for ingredients/frames\nPrompt iteration + style constraints\nBasic video review/editing (optional)",
+      "key_features": "Designed character/location/style 'ingredients' for consistent shots\nRecreated a recognizable Jurassic Park-like moment with accurate composition and mood\nUsed detailed prompts for camera, lighting, and motion to guide animation\nChanged the outcome using Extend / Jump-to to create an alternate ending\nDocumented what prompt details improved coherence and what caused drift",
+      "role_contribution": "Planned the scene, wrote the prompts, generated the ingredient images/frames, and iterated until the video matched the intended story beat and visual style.",
+      "biggest_challenge": "Maintaining character and environment consistency across frames while still getting believable motion (AI models tend to drift unless prompts and reference images are very specific).",
+      "what_i_learned": "How to storyboard an AI video, write prompts that specify camera + motion + style, and evaluate outputs based on consistency and storytelling—not just visual quality.",
+      "image": "",
+      "github_url": "",
+      "demo_url": "",
+      "created_at": "2026-04-28T00:00:00Z",
+      "updated_at": "2026-04-28T00:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 5,
+    "fields": {
+      "title": "Machine Learning Project (scikit-learn)",
+      "slug": "machine-learning-project-scikit-learn",
+      "one_sentence_summary": "Trained and evaluated a predictive model with a clear problem framing and measurable performance.",
+      "business_problem": "A predictive model can improve decisions by forecasting outcomes from historical data.",
+      "tools_used": "Python\npandas\nscikit-learn\nMatplotlib / Seaborn",
+      "key_features": "Data cleaning\nTrain/validation split\nBaseline vs improved models\nMetrics + error analysis",
+      "role_contribution": "Prepared the dataset, trained multiple models, and presented results with tradeoffs and recommendations.",
+      "biggest_challenge": "Avoiding data leakage and choosing metrics that reflect the real business goal.",
+      "what_i_learned": "How to build ML projects that are interview-ready: baselines, metrics, and explainable results.",
+      "image": "",
+      "github_url": "",
+      "demo_url": "",
+      "created_at": "2026-04-28T00:00:00Z",
+      "updated_at": "2026-04-28T00:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 6,
+    "fields": {
+      "title": "Campus SkillSwap Django Project",
+      "slug": "campus-skillswap-django-project",
+      "one_sentence_summary": "Built a Django web app to help students exchange skills, match needs, and coordinate sessions.",
+      "business_problem": "Students often have skills to share but lack a central place to discover, match, and schedule skill exchanges.",
+      "tools_used": "Python\nDjango (auth, models, views, templates)\nSQLite\nBootstrap 5\nDjango Forms\nDjango Messages",
+      "key_features": "Auth (register/login/logout)\nPost and manage skills (CRUD + dashboard)\nSearch by title + category\nBooking workflow (request/approve/deny/complete)\nReviews + ratings after completion\nBootstrap UI + Django admin",
+      "role_contribution": "Built the full-stack Django app end-to-end: models, forms, views, templates, authentication, and workflow features (search, bookings, reviews).",
+      "biggest_challenge": "Designing clean data relationships and keeping the UI consistent across many forms.",
+      "what_i_learned": "How to structure a Django app for maintainability and how to communicate tradeoffs during a demo.",
+      "image": "",
+      "github_url": "",
+      "demo_url": "/skillswap/",
+      "created_at": "2026-04-28T00:00:00Z",
+      "updated_at": "2026-04-28T00:00:00Z"
+    }
+  }
+]

@@ -1,0 +1,187 @@
+{% extends 'skillswap/base.html' %}
+{% block content %}
+<h2>Your Dashboard</h2>
+<a href="{% url 'skillswap:skill_create' %}" class="btn btn-success btn-sm mb-3">Create Skill</a>
+
+<h5>Your Skills</h5>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for skill in skills %}
+    <tr>
+      <td>{{ skill.title }}</td>
+      <td>{{ skill.get_category_display }}</td>
+      <td>{{ skill.get_availability_status_display }}</td>
+      <td>
+        <a href="{% url 'skillswap:skill_detail' skill.pk %}" class="btn btn-outline-primary btn-sm">View</a>
+        <a href="{% url 'skillswap:skill_update' skill.pk %}" class="btn btn-outline-warning btn-sm">Edit</a>
+        <a href="{% url 'skillswap:skill_delete' skill.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No skills yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h5 class="mt-4">Incoming Requests</h5>
+<ul class="list-group mb-4">
+  {% for req in incoming_requests %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div>
+      <strong>{{ req.requester.first_name }} {{ req.requester.last_name }}</strong>
+      requested
+      <strong><a href="{% url 'skillswap:skill_detail' req.skill.id %}" class="text-decoration-none">{{ req.skill.title }}</a></strong><br>
+      <span class="text-muted small">
+        Requested Slot:
+        {% if req.slot %}
+        {{ req.slot.date|date:"F j, Y" }} at {{ req.slot.start_time|time:"g:i A" }}
+        {% else %}
+        No specific time selected
+        {% endif %}
+      </span>
+      <br>
+      <span
+        class="badge {% if req.status == 'approved' %}bg-success{% elif req.status == 'denied' %}bg-danger{% else %}bg-secondary{% endif %}">
+        {{ req.status|title }}
+      </span>
+    </div>
+    <div class="d-flex gap-2">
+      {% if req.status == 'pending' %}
+      <form method="post" action="{% url 'skillswap:approve_booking' req.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+      </form>
+      <form method="post" action="{% url 'skillswap:deny_booking' req.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-sm">Deny</button>
+      </form>
+      {% elif req.status == 'approved' %}
+      <form method="post" action="{% url 'skillswap:complete_booking' req.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-sm">Mark Complete</button>
+      </form>
+      {% endif %}
+    </div>
+  </li>
+  {% empty %}
+  <li class="list-group-item text-muted">No incoming requests.</li>
+  {% endfor %}
+</ul>
+
+<h5>My Sent Requests</h5>
+<ul class="list-group">
+  {% for req in my_requests %}
+  <li class="list-group-item">
+    <strong><a href="{% url 'skillswap:skill_detail' req.skill.id %}" class="text-decoration-none">{{ req.skill.title }}</a></strong><br>
+    <span class="text-muted small">
+      Requested Slot:
+      {% if req.slot %}
+      {{ req.slot.date|date:"F j, Y" }} at {{ req.slot.start_time|time:"g:i A" }}
+      {% else %}
+      No specific time selected
+      {% endif %}
+    </span>
+    <br>
+    <span
+      class="badge {% if req.status == 'approved' %}bg-success{% elif req.status == 'denied' %}bg-danger{% else %}bg-secondary{% endif %}">
+      {{ req.status|title }}
+    </span>
+  </li>
+  {% empty %}
+  <li class="list-group-item text-muted">No sent requests.</li>
+  {% endfor %}
+</ul>
+
+<hr class="my-5">
+<h3 class="mb-4 text-primary">Completed History</h3>
+
+<div class="row">
+  <div class="col-md-6 border-end">
+    <h5>Services Provided (Your Skills)</h5>
+    <ul class="list-group list-group-flush mb-4">
+      {% for req in completed_provided %}
+      <li class="list-group-item">
+        <strong><a href="{% url 'skillswap:skill_detail' req.skill.id %}" class="text-decoration-none">{{ req.skill.title }}</a></strong>
+        <br><span class="small text-muted">Provided to {{ req.requester.first_name }} {{ req.requester.last_name }}</span>
+        <div class="mt-2">
+          {% if req.requester.pk in reviewed_user_ids %}
+            <span class="badge bg-success">Review submitted</span>
+          {% else %}
+            <a href="{% url 'skillswap:review_user' req.requester.pk %}" class="btn btn-outline-info btn-sm">Review {{ req.requester.first_name }}</a>
+          {% endif %}
+        </div>
+      </li>
+      {% empty %}
+      <li class="list-group-item text-muted">No completed services yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <h5>Services Received</h5>
+    <ul class="list-group list-group-flush mb-4">
+      {% for req in completed_received %}
+      <li class="list-group-item">
+        <strong><a href="{% url 'skillswap:skill_detail' req.skill.id %}" class="text-decoration-none">{{ req.skill.title }}</a></strong>
+        <br><span class="small text-muted">Received from {{ req.skill.owner.first_name }} {{ req.skill.owner.last_name }}</span>
+        <div class="mt-2">
+          {% if req.skill.owner.pk in reviewed_user_ids %}
+            <span class="badge bg-success">Review submitted</span>
+          {% else %}
+            <a href="{% url 'skillswap:review_user' req.skill.owner.pk %}" class="btn btn-outline-info btn-sm">Review {{ req.skill.owner.first_name }}</a>
+          {% endif %}
+          <a href="{% url 'skillswap:skill_detail' req.skill.pk %}" class="btn btn-outline-warning btn-sm mx-2">Review Skill
+            Post</a>
+        </div>
+      </li>
+      {% empty %}
+      <li class="list-group-item text-muted">No completed services received.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<hr class="my-5">
+<div class="row">
+  <div class="col-md-6 border-end">
+    <h5>User Reviews You Gave</h5>
+    <ul class="list-group list-group-flush mb-4">
+      {% for r in user_reviews_given %}
+        <li class="list-group-item">
+          <strong>{{ r.reviewee.first_name }} {{ r.reviewee.last_name }}</strong>
+          <span class="text-muted">— {{ r.rating }}/5</span>
+          <div class="small text-muted">{{ r.comment }}</div>
+        </li>
+      {% empty %}
+        <li class="list-group-item text-muted">No user reviews yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <h5>User Reviews About You</h5>
+    <ul class="list-group list-group-flush mb-4">
+      {% for r in user_reviews_received %}
+        <li class="list-group-item">
+          <strong>{{ r.reviewer.first_name }} {{ r.reviewer.last_name }}</strong>
+          <span class="text-muted">— {{ r.rating }}/5</span>
+          <div class="small text-muted">{{ r.comment }}</div>
+        </li>
+      {% empty %}
+        <li class="list-group-item text-muted">No one has reviewed you yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

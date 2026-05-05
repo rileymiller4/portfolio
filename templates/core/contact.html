@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact • AI Portfolio{% endblock %}
+
+{% block content %}
+  <section class="contact-hero">
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-lg-6">
+        <h1 class="page-title">Contact</h1>
+        <div class="page-title-underline" aria-hidden="true"></div>
+        <p class="page-subtitle mt-3">Reach me directly using the details below.</p>
+
+        <div class="card case-card mt-3">
+          <div class="card-body">
+            <div class="h4 mb-2">{{ contact_name }}</div>
+            <div class="text-muted">
+              <div class="mb-2">Email: <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></div>
+              <div>Phone: <a href="tel:{{ contact_phone }}">{{ contact_phone }}</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if profile_enabled %}
+        {% static profile_photo_path as profile_url %}
+        <div class="col-12 col-lg-6">
+          <div class="about-hero-art hero-art--tall">
+            <img
+              src="{{ profile_url }}"
+              alt="{{ contact_name }}"
+              class="about-hero-photo">
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

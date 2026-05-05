@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Home • AI Portfolio{% endblock %}
+
+{% block content %}
+  <section class="page-hero mb-4">
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-lg-6">
+        <h1 class="page-title">My AI Portfolio</h1>
+        <div class="page-title-underline" aria-hidden="true"></div>
+        <p class="page-subtitle mt-3">A Django site showcasing my projects and processes.</p>
+
+        <div class="d-flex gap-2 flex-wrap mt-3">
+          <a class="btn btn-primary" href="{% url 'project_list' %}">View projects</a>
+          <a class="btn btn-outline-primary" href="{% url 'contact' %}">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <h2 class="h4 mb-0">Featured Projects</h2>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'project_list' %}">View all</a>
+  </div>
+
+  <div class="row g-3">
+    {% for project in featured_projects %}
+      <div class="col-md-4">
+        <div class="card case-card h-100">
+          <div class="card-body d-flex flex-column">
+            <div class="case-card-head">
+              <h3 class="case-card-title">{{ project.title }}</h3>
+            </div>
+
+            <p class="case-text clamp-3 mb-3">{{ project.one_sentence_summary }}</p>
+
+            <div class="mt-auto">
+              <a class="btn btn-sm btn-primary" href="{{ project.get_absolute_url }}">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="alert alert-secondary mb-0">
+          No projects yet. Check back soon.
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

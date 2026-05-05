@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About • AI Portfolio{% endblock %}
+
+{% block content %}
+  <section class="page-hero about-hero mb-4">
+    <div class="row g-4">
+      <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
+        <h1 class="page-title">{{ about_page.title|default:'About Me' }}</h1>
+        <div class="page-title-underline" aria-hidden="true"></div>
+        <p class="page-subtitle mt-3">
+          {{ about_page.intro|default:'Learn more about my background, purpose, and what drives me to build AI-powered solutions.' }}
+        </p>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="about-hero-art">
+          <img
+            src="{% static 'profile/gradpic.jpg' %}"
+            alt="Portrait"
+            class="about-hero-photo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="row g-3">
+    <div class="col-lg-7">
+      <div class="card case-card h-100">
+        <div class="card-body">
+          <div class="case-card-head">
+            <span class="case-icon case-icon--mint" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h7A1.5 1.5 0 0 1 12 2.5v11a.5.5 0 0 1-.757.429L8 12.101l-3.243 1.828A.5.5 0 0 1 4 13.5v-11z"/>
+              </svg>
+            </span>
+            <h2 class="case-card-title">{{ about_page.story_title|default:'Purpose of My Portfolio' }}</h2>
+          </div>
+          <div class="case-text">
+            {{ about_page.story_text|default:'I created this AI portfolio website to showcase how I apply artificial intelligence to real projects in both business and creative settings. As a graduate student, I wanted a space to highlight my growth in using AI tools to build practical solutions such as chatbots, automations, web applications, and media generation. This portfolio reflects both my technical development and my interest in how AI can improve efficiency, innovation, and user experience.'|linebreaksbr }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card case-card h-100">
+        <div class="card-body">
+          <div class="case-card-head">
+            <span class="case-icon case-icon--green" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm4 8c0-1-1-4-4-4s-4 3-4 4 1 1 1 1h6s1 0 1-1Z"/>
+              </svg>
+            </span>
+            <h2 class="case-card-title">{{ about_page.bring_title|default:'About Me' }}</h2>
+          </div>
+
+          <ul class="about-list">
+            {% if about_page.bring_points_list %}
+              {% for point in about_page.bring_points_list %}
+                <li class="about-list-item">
+                  <span class="about-list-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                  </span>
+                  <div class="case-text">{{ point }}</div>
+                </li>
+              {% endfor %}
+            {% else %}
+              <li class="about-list-item">
+                <span class="about-list-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </span>
+                <div class="case-text">Management Information Systems graduate student with concentrations in Cybersecurity and Business Analytics.</div>
+              </li>
+              <li class="about-list-item">
+                <span class="about-list-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </span>
+                <div class="case-text">Experienced in building AI-driven tools, automations, and interactive web applications.</div>
+              </li>
+              <li class="about-list-item">
+                <span class="about-list-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </span>
+                <div class="case-text">Skilled at combining technical development with business problem solving.</div>
+              </li>
+              <li class="about-list-item">
+                <span class="about-list-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </span>
+                <div class="case-text">Background in analytics, digital optimization, and process improvement.</div>
+              </li>
+              <li class="about-list-item">
+                <span class="about-list-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </span>
+                <div class="case-text">Passionate about using emerging technology to create practical and innovative solutions.</div>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

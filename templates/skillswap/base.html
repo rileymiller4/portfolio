@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus SkillSwap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bs-primary: #6f42c1; /* Purple */
+      --bs-primary-rgb: 111, 66, 193;
+      --bs-info: #d63384; /* Pink */
+      --bs-info-rgb: 214, 51, 132;
+      --theme-gradient: linear-gradient(135deg, #4b238f 0%, #d63384 100%);
+    }
+    
+    .bg-primary {
+      background: var(--theme-gradient) !important;
+      color: white;
+    }
+    
+    .btn-primary, .btn-success, .btn-danger, .btn-warning {
+      background-color: var(--bs-primary);
+      border-color: var(--bs-primary);
+      color: white;
+    }
+    
+    .btn-primary:hover, .btn-success:hover, .btn-danger:hover, .btn-warning:hover {
+      background-color: var(--bs-info);
+      border-color: var(--bs-info);
+      color: white;
+    }
+    
+    .btn-outline-primary {
+      color: var(--bs-primary);
+      border-color: var(--bs-primary);
+      background-color: transparent;
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--bs-info);
+      border-color: var(--bs-info);
+      color: white;
+    }
+
+    .btn-light {
+      color: var(--bs-primary);
+      border-color: transparent;
+    }
+
+    .btn-light:hover {
+      background-color: var(--bs-primary);
+      color: white;
+    }
+    
+    .navbar-brand {
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    
+    a {
+      color: #d63384;
+    }
+    a:hover {
+      color: #a42664;
+    }
+    
+    .card {
+      border: None;
+      border-top: 4px solid var(--bs-primary);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+
+    .badge.bg-info {
+      background-color: var(--bs-info) !important;
+      color: white !important;
+    }
+  </style>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'skillswap:home' %}">Campus SkillSwap</a>
+    <div class="ms-auto d-flex gap-2 align-items-center">
+      <a class="btn btn-light btn-sm" href="{% url 'home' %}">Back to Portfolio</a>
+      {% if user.is_authenticated %}
+        <span class="text-white me-2 small">Signed in as <strong>{% if user.first_name %}{{ user.first_name }} {{ user.last_name }}{% else %}{{ user.username }}{% endif %}</strong></span>
+        <a class="btn btn-light btn-sm" href="{% url 'skillswap:home' %}">Browse Skills</a>
+        <a class="btn btn-light btn-sm" href="{% url 'skillswap:dashboard' %}">Dashboard</a>
+        <a class="btn btn-warning btn-sm" href="{% url 'skillswap:skill_create' %}">Post Skill</a>
+        <form method="post" action="{% url 'skillswap:logout' %}">
+          {% csrf_token %}
+          <button class="btn btn-danger btn-sm" type="submit">Logout</button>
+        </form>
+      {% else %}
+        <a class="btn btn-light btn-sm" href="{% url 'skillswap:login' %}">Login</a>
+        <a class="btn btn-warning btn-sm" href="{% url 'skillswap:register' %}">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<div class="container py-4">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

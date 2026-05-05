@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Skills • AI Portfolio{% endblock %}
+
+{% block content %}
+  <section class="page-hero mb-4">
+    <h1 class="page-title">{{ skills_page.title|default:'Skills' }}</h1>
+    <div class="page-title-underline" aria-hidden="true"></div>
+    <p class="page-subtitle mt-3">{{ skills_page.intro|default:'A quick snapshot of tools and strengths I use across projects.' }}</p>
+  </section>
+
+  <div class="row g-3">
+    <div class="col-12">
+      <div class="card case-card h-100">
+        <div class="card-body">
+          <div class="feature-grid">
+            {% if skills_page.skills_list %}
+              {% for s in skills_page.skills_list %}
+                <div class="feature-tile">
+                  <span class="feature-icon" aria-hidden="true">{{ s|slice:':1'|upper }}</span>
+                  <div class="feature-text">{{ s }}</div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">P</span>
+                <div class="feature-text">Python</div>
+              </div>
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">D</span>
+                <div class="feature-text">Django</div>
+              </div>
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">S</span>
+                <div class="feature-text">SQL / SQLite</div>
+              </div>
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">G</span>
+                <div class="feature-text">Git &amp; GitHub</div>
+              </div>
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">L</span>
+                <div class="feature-text">LangChain / LLM tooling</div>
+              </div>
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">N</span>
+                <div class="feature-text">n8n workflows</div>
+              </div>
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">P</span>
+                <div class="feature-text">Prompting &amp; evaluation</div>
+              </div>
+              <div class="feature-tile">
+                <span class="feature-icon" aria-hidden="true">S</span>
+                <div class="feature-text">scikit-learn</div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

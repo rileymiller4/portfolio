@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects • AI Portfolio{% endblock %}
+
+{% block content %}
+  <div class="d-flex align-items-center justify-content-between">
+    <h1 class="h3 mb-0">Projects</h1>
+  </div>
+  <p class="text-muted">Click a project to view the business context, tools, and lessons learned.</p>
+
+  <div class="row g-3">
+    {% for project in projects %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 project-card">
+          <div class="card-body">
+            <h2 class="h6 card-title mb-1">{{ project.title }}</h2>
+            <p class="card-text small text-muted">{{ project.one_sentence_summary }}</p>
+            <div class="d-flex gap-2 flex-wrap">
+              <a class="btn btn-sm btn-primary" href="{{ project.get_absolute_url }}">View details</a>
+              {% if project.demo_url %}
+                <a class="btn btn-sm btn-outline-primary" href="{{ project.demo_url }}" target="_blank" rel="noreferrer">Demo</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="alert alert-secondary mb-0">
+          No projects yet. Load the starter fixture with <code>python manage.py loaddata projects</code>.
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
