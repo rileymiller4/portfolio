@@ -54,7 +54,7 @@
                   </div>
                 </div>
               {% elif project.image %}
-                <div class="case-media-frame case-media-frame--auto">
+                <div class="case-media-frame case-media-frame--auto {% if project.slug == 'langchain-agent-project' or project.slug == 'n8n-agent-workflow-project' %}case-media-frame--small{% endif %}">
                   <img class="case-media case-media--auto" src="{{ project.image.url }}" alt="{{ project.title }} screenshot" loading="lazy" decoding="async">
                 </div>
               {% else %}

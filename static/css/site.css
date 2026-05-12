@@ -212,6 +212,18 @@ body {
   aspect-ratio: var(--case-media-ar, 1.3333);
 }
 
+/* Smaller framed variant for specific case-study pages (LangChain, n8n) */
+.case-media-frame--small {
+  max-height: 420px;
+  overflow: hidden;
+}
+
+.case-media-frame--small .case-media {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .case-media-frame iframe,
 .case-media-frame video {
   border: 0;
