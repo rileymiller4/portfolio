@@ -214,7 +214,7 @@ body {
 
 /* Smaller framed variant for specific case-study pages (LangChain, n8n) */
 .case-media-frame--small {
-  max-height: 420px;
+  max-height: 250px;
   overflow: hidden;
 }
 
