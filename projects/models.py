@@ -20,6 +20,7 @@ class Project(models.Model):
 
 	image = models.ImageField(upload_to='projects/', blank=True, null=True)
 	workflow_image = models.ImageField(upload_to='projects/workflows/', blank=True, null=True)
+	email_output = models.TextField(blank=True)
 	video = models.FileField(upload_to='projects/videos/', blank=True, null=True)
 	github_url = models.URLField(blank=True)
 	demo_url = models.CharField(max_length=500, blank=True)
