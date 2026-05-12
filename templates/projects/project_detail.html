@@ -100,6 +100,20 @@
           </div>
         {% endif %}
 
+        {% if project.slug == 'n8n-agent-workflow-project' and project.email_output %}
+          <div class="col-12 col-md-6 col-xl-4">
+            <div class="card case-card h-100">
+              <div class="card-body">
+                <div class="case-card-head">
+                  <span class="case-icon case-icon--gold" aria-hidden="true"></span>
+                  <h2 class="case-card-title">Example Email</h2>
+                </div>
+                <pre class="case-code mb-0" style="font-size: 0.8rem; max-height: 300px; overflow-y: auto;">{{ project.email_output|escape }}</pre>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
         {% if project.workflow_image and project.slug == 'langchain-agent-project' %}
           <div class="col-12 col-md-6 col-xl-4">
             <div class="card case-card h-100">
@@ -206,20 +220,6 @@
             </div>
           </div>
         </div>
-
-        {% if project.slug == 'n8n-agent-workflow-project' and project.email_output %}
-          <div class="col-12 col-md-6 col-xl-4">
-            <div class="card case-card h-100">
-              <div class="card-body">
-                <div class="case-card-head">
-                  <span class="case-icon case-icon--gold" aria-hidden="true"></span>
-                  <h2 class="case-card-title">Example Email</h2>
-                </div>
-                <pre class="case-code mb-0" style="font-size: 0.8rem; max-height: 300px; overflow-y: auto;">{{ project.email_output|escape }}</pre>
-              </div>
-            </div>
-          </div>
-        {% endif %}
       </div>
     {% endwith %}
 
