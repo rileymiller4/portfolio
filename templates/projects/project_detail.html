@@ -75,7 +75,7 @@
             <div class="card-body">
               <div class="case-card-head">
                 <span class="case-icon case-icon--mint" aria-hidden="true"></span>
-                <h2 class="case-card-title mb-0">Workflow Diagram</h2>
+                <h2 class="case-card-title mb-0">{% if project.slug == 'langchain-agent-project' %}Example Booking{% else %}Workflow Diagram{% endif %}</h2>
               </div>
               <div class="case-media-frame case-media-frame--auto mt-3 {% if project.slug == 'langchain-agent-project' or project.slug == 'n8n-agent-workflow-project' %}case-media-frame--small{% endif %}">
                 <img class="case-media case-media--auto" src="{{ project.workflow_image.url }}" alt="{{ project.title }} workflow diagram" loading="lazy" decoding="async">
