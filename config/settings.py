@@ -148,7 +148,8 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = Path(os.getenv('MEDIA_ROOT', str(BASE_DIR / 'media')))
+# Project-uploaded assets are stored under static/projects in this repo.
+MEDIA_ROOT = Path(os.getenv('MEDIA_ROOT', str(BASE_DIR / 'static')))
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
