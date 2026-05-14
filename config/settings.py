@@ -153,7 +153,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Portfolio images and videos are stored in `static/projects/` and served as static assets.
-MEDIA_URL = '/static/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(os.getenv('MEDIA_ROOT', str(BASE_DIR / 'static')))
 
 LOGIN_REDIRECT_URL = 'home'
